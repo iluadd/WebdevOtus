@@ -9,7 +9,6 @@ def get_links(page=None, numlinks=None, curent_num=1, rec=None):
     page = requests.get(page)
     soup = BeautifulSoup(page.content, features="html.parser")
 
-    print(f'numlinks {numlinks}\n curent_num {curent_num}')
     for num, link in enumerate(soup.findAll('a',
                                attrs={'href': re.compile("^https://")}),
                                start=curent_num):
