@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 def get_links(page=None, numlinks=None, curent_num=0, rec_l=None):
 
-    if rec_l <= curent_num:
+    if rec_l+1 <= curent_num:
         return True
 
     page = requests.get(page)
@@ -21,10 +21,11 @@ def get_links(page=None, numlinks=None, curent_num=0, rec_l=None):
 
     pprint(f'level {curent_num} links \n{links_clean[:clampped_numlinks]}')
 
-    get_links(page=links_clean[curent_num],
-              numlinks=numlinks,
-              curent_num=curent_num+1,
-              rec_l=rec_l)
+    for i in range(clampped_numlinks):
+        get_links(page=links_clean[i],
+                  numlinks=numlinks,
+                  curent_num=curent_num+1,
+                  rec_l=rec_l)
 
 
 if __name__ == "__main__":
